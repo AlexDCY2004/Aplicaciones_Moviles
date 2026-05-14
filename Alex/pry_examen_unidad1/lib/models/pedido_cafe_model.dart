@@ -6,7 +6,6 @@ class PedidoCafeModelo {
   double subtotal;
   double iva;
   double total;
-  DateTime? creadoEn;
 
   PedidoCafeModelo({
     required this.nombreCliente,
@@ -16,7 +15,6 @@ class PedidoCafeModelo {
     this.subtotal = 0.0,
     this.iva = 0.0,
     this.total = 0.0,
-    this.creadoEn,
   });
 
   Map<String, dynamic> toJson() => {
@@ -25,9 +23,7 @@ class PedidoCafeModelo {
         'tamano': tamano,
         'cantidad': cantidad,
         'subtotal': subtotal,
-        'iva': iva,
-      'total': total,
-      'creadoEn': creadoEn?.toIso8601String(),
+        'iva': iva
       };
 
   static PedidoCafeModelo fromJson(Map<String, dynamic> json) => PedidoCafeModelo(
@@ -38,6 +34,5 @@ class PedidoCafeModelo {
         subtotal: (json['subtotal'] ?? 0).toDouble(),
         iva: (json['iva'] ?? 0).toDouble(),
         total: (json['total'] ?? 0).toDouble(),
-        creadoEn: json['creadoEn'] != null ? DateTime.parse(json['creadoEn']) : null,
       );
 }

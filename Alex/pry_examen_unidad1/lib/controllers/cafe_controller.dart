@@ -6,7 +6,7 @@ class CafeController {
   final Map<String, Map<String, double>> preciosPorProductoTamano = {
     'Café': {
       'Pequeño': 1.50,
-      'Mediano': 1.80, // punto intermedio
+      'Mediano': 1.80, 
       'Grande': 2.10,
     },
     'Capuchino': {

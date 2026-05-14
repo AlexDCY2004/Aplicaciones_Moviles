@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../models/pedido_cafe_model.dart';
 import '../../controllers/cafe_controller.dart';
-import '../../services/sales_repository.dart';
 import '../atoms/cliente_text_field.dart';
 import '../atoms/cantidad_text_field.dart';
 import '../atoms/product_dropdown.dart';
@@ -38,8 +37,6 @@ class _PedidoFormState extends State<PedidoForm> {
     );
     try {
       final procesado = _controller.procesarPedido(pedido);
-      // Guardar en historial
-      SalesRepository.instance.add(procesado);
       widget.onPedidoProcesado(procesado);
     } catch (e) {
       // Mostrar solo el mensaje legible del ArgumentError (sin prefijo técnico)
