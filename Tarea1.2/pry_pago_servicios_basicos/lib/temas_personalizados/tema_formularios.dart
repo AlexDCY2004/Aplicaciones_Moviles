@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'esquemaColor.dart';
+import 'esquema_Color.dart';
 
 class TemaFormulariosPersonal {
   static final InputDecorationTheme campos = InputDecorationTheme(

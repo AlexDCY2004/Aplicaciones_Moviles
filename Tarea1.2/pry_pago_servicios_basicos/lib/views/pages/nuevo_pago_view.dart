@@ -1,24 +1,21 @@
 import 'package:flutter/material.dart';
-import '../molecules/selectorServicioMolecule.dart';
-import '../atoms/cajaTextoAtom.dart';
-import '../molecules/resumenAjustesMolecule.dart';
+import '../molecules/selector_servicio_molecule.dart';
+import '../atoms/caja_texto_atom.dart';
+import '../molecules/resumen_ajustes_molecule.dart';
 import '../../models/modelos.dart';
 import '../../controllers/controllers.dart';
 import '../../controllers/singletons.dart';
 
-// Nuevo flujo: primero seleccionar cliente, luego servicio y ajustes.
 
 class NuevoPagoView extends StatefulWidget {
   final bool hideOtros;
-  const NuevoPagoView({Key? key, this.hideOtros = false}) : super(key: key);
+  const NuevoPagoView({super.key, this.hideOtros = false});
 
   @override
   State<NuevoPagoView> createState() => _NuevoPagoViewState();
 }
 
 class _NuevoPagoViewState extends State<NuevoPagoView> {
-  // `servicios` list will be obtained from ServicioController in build
-  // (kept dynamic to stay in sync with controller)
   String? servicioSeleccionado;
   String? clienteSeleccionadoId;
   String? operadoraSeleccionada;
@@ -29,7 +26,6 @@ class _NuevoPagoViewState extends State<NuevoPagoView> {
   final consumoCtrl = TextEditingController();
   final seleccionados = <String>{};
   List<Ajuste> ajustesEjemplo = [];
-  // use shared singletons so data (services, ajustes, pagos) is shared across app
   final ServicioController servicioController = servicioControllerSingleton;
   final AjusteController ajusteController = ajusteControllerSingleton;
   late final PagoController pagoController = pagoControllerSingleton;
@@ -37,15 +33,11 @@ class _NuevoPagoViewState extends State<NuevoPagoView> {
   @override
   void initState() {
     super.initState();
-    // load ajustes from controller
     ajustesEjemplo = [...ajusteController.obtenerDescuentos(), ...ajusteController.obtenerRecargos()];
-    // load servicios names
     final svs = servicioController.obtenerServicios();
     if (svs.isNotEmpty) {
-      // preselect first service
       servicioSeleccionado = svs.first.nombre;
     }
-    // preselect first client if exists
     final cls = clienteControllerSingleton.obtenerClientes();
     if (cls.isNotEmpty) clienteSeleccionadoId = cls.first.id;
   }
@@ -63,14 +55,13 @@ class _NuevoPagoViewState extends State<NuevoPagoView> {
           const SizedBox(height: 12),
               SelectorServicioMolecule(
                 servicios: servicioController
-                    .obtenerServicios()
-                    .where((s) => s.id != 's_basura' && (!widget.hideOtros || s.id != 's_otros'))
-                    .map((s) => s.nombre)
-                    .toList(),
+                  .obtenerServicios()
+                  .where((s) => s.id != 's_basura' && s.id != 's_streaming' && (!widget.hideOtros || s.id != 's_otros'))
+                  .map((s) => s.nombre)
+                  .toList(),
                 seleccionado: servicioSeleccionado,
                 onChanged: (s) => setState(() => servicioSeleccionado = s)),
           const SizedBox(height: 8),
-          // If TV selected, show streaming selector and price
           Builder(builder: (ctx) {
             final serv = servicioController.obtenerServicios().firstWhere((s) => s.nombre == servicioSeleccionado, orElse: () => servicioController.obtenerServicios().first);
             if (serv.id != 's_tv') return const SizedBox.shrink();
@@ -79,7 +70,7 @@ class _NuevoPagoViewState extends State<NuevoPagoView> {
               const Text('Streaming (opcional)'),
               const SizedBox(height: 6),
               DropdownButtonFormField<String>(
-                value: streamingSeleccionado,
+                initialValue: streamingSeleccionado,
                 items: ['Ninguno', 'Netflix', 'Max', 'Disney+', 'Otros'].map((o) => DropdownMenuItem(value: o, child: Text(o))).toList(),
                 onChanged: (v) => setState(() => streamingSeleccionado = v),
                 decoration: const InputDecoration(border: OutlineInputBorder(), contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8)),
@@ -92,7 +83,6 @@ class _NuevoPagoViewState extends State<NuevoPagoView> {
               ]
             ]);
           }),
-          // If Internet selected, show operadora selector
           Builder(builder: (ctx) {
             final serv = servicioController.obtenerServicios().firstWhere((s) => s.nombre == servicioSeleccionado, orElse: () => servicioController.obtenerServicios().first);
             if (serv.id != 's_internet') return const SizedBox.shrink();
@@ -101,7 +91,7 @@ class _NuevoPagoViewState extends State<NuevoPagoView> {
               const Text('Operadora'),
               const SizedBox(height: 6),
               DropdownButtonFormField<String>(
-                value: operadoraSeleccionada,
+                initialValue: operadoraSeleccionada,
                 items: ['Fibramax', 'CNT', 'Netlife', 'Otros'].map((o) => DropdownMenuItem(value: o, child: Text(o))).toList(),
                 onChanged: (v) => setState(() => operadoraSeleccionada = v),
                 decoration: const InputDecoration(border: OutlineInputBorder(), contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8)),
@@ -136,7 +126,6 @@ class _NuevoPagoViewState extends State<NuevoPagoView> {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Seleccione un cliente antes de continuar')));
       return;
     }
-    // If Internet selected, validate operadora
     if (servicio.id == 's_internet') {
       if (operadoraSeleccionada == null || operadoraSeleccionada!.isEmpty) {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Seleccione la operadora')));
@@ -147,7 +136,6 @@ class _NuevoPagoViewState extends State<NuevoPagoView> {
         return;
       }
     }
-    // If TV selected and streaming chosen, validate streaming fields
     String? streamingNombre;
     double streamingPrecio = 0.0;
     if (servicio.id == 's_tv') {
@@ -194,9 +182,6 @@ class _NuevoPagoViewState extends State<NuevoPagoView> {
       seleccionados.clear();
     });
   }
-}
-
-extension on _NuevoPagoViewState {
   Widget _buildClienteSelector(BuildContext context) {
     final clientes = clienteControllerSingleton.obtenerClientes();
     if (clientes.isEmpty) {
@@ -206,7 +191,7 @@ extension on _NuevoPagoViewState {
       ]);
     }
     return DropdownButtonFormField<String>(
-      value: clienteSeleccionadoId,
+      initialValue: clienteSeleccionadoId,
       items: clientes.map((c) => DropdownMenuItem(value: c.id, child: Text(c.nombre))).toList(),
       onChanged: (v) => setState(() => clienteSeleccionadoId = v),
       decoration: const InputDecoration(border: OutlineInputBorder(), contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8)),

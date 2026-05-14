@@ -1,4 +1,4 @@
-import 'tarifaModel.dart';
+import 'tarifa_model.dart';
 
 class Servicio {
   final String id;

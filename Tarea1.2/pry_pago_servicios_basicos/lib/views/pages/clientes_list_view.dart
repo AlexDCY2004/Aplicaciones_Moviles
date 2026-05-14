@@ -1,9 +1,10 @@
+
 import 'package:flutter/material.dart';
 import 'package:pry_pago_servicios_basicos/widgets/client_card.dart';
 import '../../controllers/singletons.dart';
 
 class ClientesListView extends StatelessWidget {
-  const ClientesListView({Key? key}) : super(key: key);
+  const ClientesListView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +22,8 @@ class ClientesListView extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 6.0),
                   child: ClientCard(
                     nombre: cl.nombre,
-                    direccion: cl.direccion ?? '',
-                    telefono: cl.telefono ?? '',
+                    direccion: cl.direccion,
+                    telefono: cl.telefono,
                     email: cl.correo ?? '',
                   ),
                 );

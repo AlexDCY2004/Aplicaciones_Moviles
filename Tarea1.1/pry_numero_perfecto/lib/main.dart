@@ -1,6 +1,6 @@
 
   import 'package:flutter/material.dart';
-  import 'package:pry_numero_perfecto/view/numPerfectoView.dart';
+  import 'package:pry_numero_perfecto/view/num_perfecto_view.dart';
 
   void main() {
     runApp(const MyApp());

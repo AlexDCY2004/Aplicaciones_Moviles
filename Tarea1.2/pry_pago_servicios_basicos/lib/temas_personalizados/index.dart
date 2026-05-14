@@ -1,7 +1,7 @@
-export 'esquemaColor.dart';
+export 'esquema_Color.dart';
 export 'tipografia.dart';
-export 'temaAppbar.dart';
-export 'temaFondos.dart';
-export 'temaFormularios.dart';
-export 'temaBotones.dart';
-export 'temaGeneral.dart';
+export 'tema_app_bar.dart';
+export 'tema_fondos.dart';
+export 'tema_formularios.dart';
+export 'tema_botones.dart';
+export 'tema_general.dart';

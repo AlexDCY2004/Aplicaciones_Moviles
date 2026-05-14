@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../controller/numPerfectoController.dart';
+import '../controller/num_perfecto_controller.dart';
 
 class NumberField extends StatelessWidget {
 	final TextEditingController controller;

@@ -1,4 +1,4 @@
-import '../model/numPerfectoModel.dart';
+import '../model/num_perfecto_model.dart';
 
 class NumPerfectoController {
 	String procesarNumero(String s) {

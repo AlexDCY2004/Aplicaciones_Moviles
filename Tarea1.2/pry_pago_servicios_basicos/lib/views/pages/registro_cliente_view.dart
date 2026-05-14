@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import '../molecules/formularioClienteMolecule.dart';
+import '../molecules/formulario_cliente_molecule.dart';
 import '../../controllers/controllers.dart';
 import '../../controllers/singletons.dart';
-import '../../models/clienteModel.dart';
+import '../../models/cliente_model.dart';
 
 final ClienteController _clienteController = clienteControllerSingleton;
 
 class RegistroClienteView extends StatelessWidget {
-  const RegistroClienteView({Key? key}) : super(key: key);
+  const RegistroClienteView({super.key});
 
   void _guardarCliente(BuildContext context, String nombre, String direccion, String telefono, String correo) {
     final cliente = Cliente(

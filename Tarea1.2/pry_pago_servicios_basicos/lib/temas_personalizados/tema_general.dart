@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'esquemaColor.dart';
+import 'esquema_Color.dart';
 import 'tipografia.dart';
-import 'temaAppbar.dart';
-import 'temaBotones.dart';
-import 'temaFormularios.dart';
+import 'tema_app_bar.dart';
+import 'tema_botones.dart';
+import 'tema_formularios.dart';
 
 class TemaPersonal {
   static final ThemeData claro = ThemeData(

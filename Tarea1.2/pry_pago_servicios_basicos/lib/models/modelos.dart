@@ -1,5 +1,5 @@
-export 'clienteModel.dart';
-export 'servicioModel.dart';
-export 'tarifaModel.dart';
-export 'ajusteModel.dart';
-export 'pagoModel.dart';
+export 'cliente_model.dart';
+export 'servicio_model.dart';
+export 'tarifa_model.dart';
+export 'ajuste_model.dart';
+export 'pago_model.dart';

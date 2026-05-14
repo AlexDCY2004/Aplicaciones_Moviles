@@ -1,10 +1,11 @@
+
 import 'package:flutter/material.dart';
 
 import '../../controllers/singletons.dart';
-import '../../temas_personalizados/esquemaColor.dart';
+import '../../temas_personalizados/esquema_Color.dart';
 
 class HistorialView extends StatelessWidget {
-  const HistorialView({Key? key}) : super(key: key);
+  const HistorialView({super.key});
 
   @override
   Widget build(BuildContext context) {

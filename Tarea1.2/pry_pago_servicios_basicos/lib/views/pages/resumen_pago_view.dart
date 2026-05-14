@@ -5,7 +5,7 @@ import '../../controllers/singletons.dart';
 class ResumenPagoView extends StatelessWidget {
   final Map<String, dynamic>? resumenArgs;
 
-  const ResumenPagoView({Key? key, this.resumenArgs}) : super(key: key);
+  const ResumenPagoView({super.key, this.resumenArgs});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,6 @@ class ResumenPagoView extends StatelessWidget {
       if (s == '-') return s;
       return '\$' + s;
     }
-    // `resumenArgs` expected to be a map with keys: resumen, clienteId, servicioId, servicioNombre, consumo, ajustes
     final args = resumenArgs ?? ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
     if (args == null) {
       return Scaffold(appBar: AppBar(title: const Text('Resumen de pago')), body: const Center(child: Text('No hay resumen')));
@@ -82,7 +81,6 @@ class ResumenPagoView extends StatelessWidget {
             Expanded(
               child: ElevatedButton(
                 onPressed: () {
-                  // Confirmar pago: guardar y navegar al historial (permitir volver atrás)
                   if (clienteId == null || servicio == null) return;
                   pagoControllerSingleton.guardarPago(
                     clienteId: clienteId,
@@ -94,8 +92,7 @@ class ResumenPagoView extends StatelessWidget {
                     streamingNombre: streamingNombreArg,
                     streamingPrecio: streamingPrecioArg,
                   );
-                  // Navegar a historial dejando sólo la ruta principal debajo,
-                  // así al volver queda la pantalla principal en lugar del resumen.
+                  
                   Navigator.pushNamedAndRemoveUntil(context, '/historial', ModalRoute.withName('/'));
                 },
                 child: const Text('Confirmar pago'),
@@ -105,7 +102,6 @@ class ResumenPagoView extends StatelessWidget {
             Expanded(
               child: OutlinedButton(
                 onPressed: () {
-                  // Cancelar: volver a la pantalla anterior
                   Navigator.pop(context);
                 },
                 child: const Text('Cancelar'),

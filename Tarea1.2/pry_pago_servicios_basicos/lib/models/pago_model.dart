@@ -1,6 +1,4 @@
-import 'ajusteModel.dart';
-import 'clienteModel.dart';
-import 'servicioModel.dart';
+import 'ajuste_model.dart';
 
 class Pago {
   final String id;

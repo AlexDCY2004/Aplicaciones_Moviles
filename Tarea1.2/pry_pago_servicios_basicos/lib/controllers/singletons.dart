@@ -1,9 +1,9 @@
-import 'servicioController.dart';
-import 'ajusteController.dart';
-import 'clienteController.dart';
-import 'pagoController.dart';
+import 'servicio_controller.dart';
+import 'ajuste_controller.dart';
+import 'cliente_controller.dart';
+import 'pago_controller.dart';
 
-/// Shared singletons for controllers so state is visible across screens.
+
 final servicioControllerSingleton = ServicioController();
 final ajusteControllerSingleton = AjusteController();
 final clienteControllerSingleton = ClienteController();

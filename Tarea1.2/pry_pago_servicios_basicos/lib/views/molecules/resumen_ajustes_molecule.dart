@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../atoms/checkboxAtom.dart';
-import '../../models/ajusteModel.dart';
+import '../atoms/check_box_atom.dart';
+import '../../models/ajuste_model.dart';
 
 class ResumenAjustesMolecule extends StatelessWidget {
   final List<Ajuste> ajustes;

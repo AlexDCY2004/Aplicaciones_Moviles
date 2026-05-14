@@ -7,12 +7,12 @@ class ClientCard extends StatelessWidget {
   final String email;
 
   const ClientCard({
-    Key? key,
+    super.key,
     required this.nombre,
     required this.direccion,
     required this.telefono,
     required this.email,
-  }) : super(key: key);
+  });
 
   Widget _buildField(String label, String value, TextStyle labelStyle, TextStyle valueStyle) {
     return Column(

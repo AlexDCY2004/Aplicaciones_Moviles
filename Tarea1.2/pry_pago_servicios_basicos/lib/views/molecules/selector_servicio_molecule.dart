@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import '../atoms/etiquetaAtom.dart';
+import '../atoms/etiqueta_atom.dart';
 
 class SelectorServicioMolecule extends StatelessWidget {
   final List<String> servicios;
   final String? seleccionado;
   final ValueChanged<String?> onChanged;
 
-  const SelectorServicioMolecule({Key? key, required this.servicios, this.seleccionado, required this.onChanged}) : super(key: key);
-
+  const SelectorServicioMolecule({super.key, required this.servicios, this.seleccionado, required this.onChanged});
   @override
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
